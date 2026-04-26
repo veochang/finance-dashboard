@@ -1,2 +1,6 @@
 streamlit
 pandas
+numpy
+requests
+sqlalchemy
+psycopg2-binary
