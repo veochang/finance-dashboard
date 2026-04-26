@@ -1,19 +1,36 @@
-# :earth_americas: GDP dashboard template
+# Veochang Finance Dashboard
 
-A simple Streamlit app showing the GDP of different countries in the world.
+Streamlit dashboard for portfolio tracking with pages:
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gdp-dashboard-template.streamlit.app/)
+- **History**: total, cost, gain, tax-adjusted trend over time
+- **Gain**: gain and realized tax views
+- **Summary**: latest account-level snapshot + category allocations
+- **Goal**: target-cash planning and allocation gap view
 
-### How to run it on your own machine
+## Data sources
 
-1. Install the requirements
+The app loads data in this priority order:
 
-   ```
-   $ pip install -r requirements.txt
-   ```
+1. **Postgres via `st.secrets["DB_CONNECT_STR"]`** (tables: `transactions`, `tickers`, `history`, `tax_rate`, optional `goal`)
+2. **Google Sheets CSV export** for spreadsheet ID `1Ozt_eBUvh6cuJI7njTtMAe0uAtJgV_GmOHdJM1HxxSg`
+   - Sheets expected: `Transactions`, `Tickers`, `History`, `Tax Rate`, optional `Goal`
 
-2. Run the app
+## Run locally
 
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+```bash
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+
+## Streamlit Cloud secrets
+
+Set these in Streamlit Cloud (already provisioned in your environment):
+
+- `DB`
+- `DB_HOST`
+- `DB_POLLER`
+- `DB_ROLE`
+- `DB_PASSWORD`
+- `DB_CONNECT_STR`
+
+Only `DB_CONNECT_STR` is required by the app directly.
